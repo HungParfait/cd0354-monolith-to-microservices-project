@@ -1,7 +1,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: backend-user-deployment
+  name: backend-user-deployment-v1.0.0
   labels:
     app: backend-user
     version: v1.0.0
