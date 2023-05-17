@@ -1,22 +1,26 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: backend-user-deployment
+  name: backend-feed-deployment
   labels:
-    app: backend-user
+    app: backend-feed
+    version: v1.1.0
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: backend-user
+      app: backend-feed
+      version: v1.1.0
   template:
     metadata:
       labels:
-        app: backend-user
+        app: backend-feed
+        version: v1.1.0
     spec:
       containers:
-      - name: backend-user
-        image: hungparfait009/udagram-api-user
+      - name: backend-feed
+        image: hungparfait009/udagram-api-feed:v1.1.0
+        imagePullPolicy: Always
         ports:
         - containerPort: 8080
         env:
@@ -60,3 +64,15 @@ spec:
               secretKeyRef:
                 name: db-credential
                 key: POSTGRES_USERNAME
+          - name: aws_access_key_id
+            valueFrom:
+              secretKeyRef:
+                name: aws
+                key: aws_access_key_id
+          - name: aws_secret_access_key
+            valueFrom:
+              secretKeyRef:
+                name: aws
+                key: aws_secret_access_key
+          
+
